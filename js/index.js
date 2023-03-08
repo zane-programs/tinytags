@@ -8,7 +8,9 @@
   }
 
   function viewTag(num) {
-    window.location.href = "/tag.html?id=" + num;
+    if (num || num !== "") {
+      window.location.href = "/tag.html?id=" + num;
+    }
   }
 
   window.addEventListener("keydown", ({ key }) => {
@@ -23,6 +25,10 @@
           break;
         case "Enter":
           viewTag(currentTagNumber);
+          break;
+        case "*":
+        case "#":
+          setCurrentTagNumber("");
           break;
       }
     }
