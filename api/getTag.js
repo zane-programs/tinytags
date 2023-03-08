@@ -14,6 +14,7 @@ export default async function getTag(req, res) {
       : res
           .status(200)
           .send({
+            id: tag.id[0],
             name: tag.Title[0],
             sheetMusic: {
               url: tag.SheetMusicAlt[0],
