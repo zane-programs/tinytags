@@ -44,4 +44,4 @@ async function getTag(req, res) {
   });
 }
 
-export default function allowCors(getTag);
+export default allowCors(getTag);
