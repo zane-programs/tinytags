@@ -53,7 +53,7 @@
       
       case "0":
         // Reset
-        setZoomFactor(0);
+        setZoomFactor(1);
         setX(0);
         setY(0);
         break;
