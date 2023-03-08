@@ -50,6 +50,13 @@
       case "#":
         setZoomFactor(zoomFactor * 1.1);
         break;
+      
+      case "0":
+        // Reset
+        setZoomFactor(0);
+        setX(0);
+        setY(0);
+        break;
     }
     console.log(key);
   });
@@ -58,9 +65,7 @@
     $tagView = document.getElementById("tagView");
 
     // api request
-    const req = await fetch(
-      "/api/getTag" + window.location.search
-    );
+    const req = await fetch("/api/getTag" + window.location.search);
     const res = await req.json();
 
     if (res.error) {
