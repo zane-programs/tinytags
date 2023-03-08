@@ -8,7 +8,7 @@
   }
 
   function viewTag(num) {
-    window.location.href = "/tag.html?num=" + num;
+    window.location.href = "/tag.html?id=" + num;
   }
 
   window.addEventListener("keydown", ({ key }) => {
