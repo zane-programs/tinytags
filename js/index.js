@@ -18,6 +18,7 @@
       setCurrentTagNumber(currentTagNumber + key);
     } else {
       switch (key) {
+        case "#":
         case "Backspace":
           setCurrentTagNumber(
             currentTagNumber.substring(0, currentTagNumber.length - 1)
@@ -27,7 +28,6 @@
           viewTag(currentTagNumber);
           break;
         case "*":
-        case "#":
           setCurrentTagNumber("");
           break;
       }
