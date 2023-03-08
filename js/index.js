@@ -1,0 +1,35 @@
+(function (window, document) {
+  let $tagNumber;
+  let currentTagNumber = "";
+
+  function setCurrentTagNumber(num) {
+    currentTagNumber = num;
+    $tagNumber.innerHTML = currentTagNumber;
+  }
+
+  function viewTag(num) {
+    window.location.href = "/tag.html?num=" + num;
+  }
+
+  window.addEventListener("keydown", ({ key }) => {
+    if (/\b[0-9]\b/.test(key)) {
+      setCurrentTagNumber(currentTagNumber + key);
+    } else {
+      switch (key) {
+        case "Backspace":
+          setCurrentTagNumber(
+            currentTagNumber.substring(0, currentTagNumber.length - 1)
+          );
+          break;
+        case "Enter":
+          viewTag(currentTagNumber);
+          break;
+      }
+    }
+    console.log(key);
+  });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    $tagNumber = document.getElementById("tagNumber");
+  });
+})(window, document);
