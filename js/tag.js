@@ -1,19 +1,28 @@
 (function (window, document) {
+  // constant config
+  const ZOOM_INCREMENT_PERCENT = 0.1;
+  const INITIAL_ARROW_KEY_DELTA = 14;
+
+  // selector for #tagView
   let $tagView;
 
+  // - variables zoom and arrow-key
   let zoomFactor = 1;
+  let scaledArrowKeyDelta = INITIAL_ARROW_KEY_DELTA;
 
+  // variables - x and y position
   let x = 0;
   let y = 0;
 
+  // update #tagView transform style (scale and translate)
   function updateTransform() {
     $tagView.style.transform = `scale(${zoomFactor}) translate(${x}px,${y}px)`;
   }
 
   function setZoomFactor(factor) {
     zoomFactor = factor;
+    scaledArrowKeyDelta = 14 * (1 / zoomFactor);
     updateTransform();
-    console.log(factor);
   }
 
   function setX(val) {
@@ -25,40 +34,41 @@
     updateTransform();
   }
 
-  function getScaledArrowKeyDelta() {
-    return 14 * (1 / zoomFactor);
-  }
-
   window.addEventListener("keydown", ({ key }) => {
     switch (key) {
       case "ArrowUp":
-        setY(y + getScaledArrowKeyDelta());
+        // up
+        setY(y + scaledArrowKeyDelta);
         break;
       case "ArrowDown":
-        setY(y - getScaledArrowKeyDelta());
-        break;
-      case "ArrowRight":
-        setX(x - getScaledArrowKeyDelta());
+        // down
+        setY(y - scaledArrowKeyDelta);
         break;
       case "ArrowLeft":
-        setX(x + getScaledArrowKeyDelta());
+        // left
+        setX(x + scaledArrowKeyDelta);
+        break;
+      case "ArrowRight":
+        // right
+        setX(x - scaledArrowKeyDelta);
         break;
 
       case "*":
-        setZoomFactor(zoomFactor * (1 / 1.1));
+        // zoom out
+        setZoomFactor(zoomFactor * (1 / (1 + ZOOM_INCREMENT_PERCENT)));
         break;
       case "#":
-        setZoomFactor(zoomFactor * 1.1);
+        // zoom in
+        setZoomFactor(zoomFactor * (1 + ZOOM_INCREMENT_PERCENT));
         break;
-      
+
       case "0":
-        // Reset
+        // reset zoom and (x, y)
         setZoomFactor(1);
         setX(0);
         setY(0);
         break;
     }
-    console.log(key);
   });
 
   document.addEventListener("DOMContentLoaded", async function () {
@@ -68,23 +78,27 @@
     const req = await fetch("/api/getTag" + window.location.search);
     const res = await req.json();
 
+    // haha error handling
     if (res.error) {
-      alert("error", JSON.stringify(res.error));
+      alert("error\n\n" + JSON.stringify(res.error));
       return;
     }
 
+    let sheetMusicElement;
     if (res.sheetMusic.fileType.toLowerCase() === "pdf") {
-      const embed = document.createElement("embed");
-      embed.tabIndex = -1;
+      // pdf - embed as google drive pdf embed
+      sheetMusicElement = document.createElement("embed");
       embed.src =
         "https://drive.google.com/viewerng/viewer?embedded=true&chrome=false&url=" +
         encodeURIComponent(res.sheetMusic.url);
-      $tagView.appendChild(embed);
     } else {
-      const img = document.createElement("img");
-      img.tabIndex = -1;
-      img.src = res.sheetMusic.url;
-      $tagView.appendChild(img);
+      // otherwise - embed as html image
+      sheetMusicElement = document.createElement("img");
+      sheetMusicElement.src = res.sheetMusic.url;
     }
+
+    // make it untabbable & add to #tagView
+    sheetMusicElement.tabIndex = -1;
+    $tagView.appendChild(sheetMusicElement);
   });
 })(window, document);
