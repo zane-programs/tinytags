@@ -50,7 +50,7 @@
       case "#":
         setZoomFactor(zoomFactor * 1.1);
         break;
-      
+
       case "0":
         // Reset
         setZoomFactor(1);
@@ -69,7 +69,7 @@
     const res = await req.json();
 
     if (res.error) {
-      alert("error", JSON.stringify(res.error));
+      alert("error\n\n" + JSON.stringify(res.error));
       return;
     }
 
