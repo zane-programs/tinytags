@@ -55,7 +55,7 @@
       "faves",
       JSON.stringify(
         faves.filter(function (fave) {
-          fave.indexOf(null) === -1;
+          return fave.indexOf(null) !== -1;
         })
       )
     );
