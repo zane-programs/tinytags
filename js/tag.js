@@ -105,6 +105,20 @@
     showModalMessage(inFaves ? "unfaved" : "faved", "#ff4be8", "#fff", 1500);
   }
 
+  function startPDFLoadWatcher(sheetMusicElement) {
+    let refreshInterval = setInterval(() => {
+      console.log("refresh!");
+      // refresh
+      sheetMusicElement.src = sheetMusicElement.src;
+    }, 1500);
+    sheetMusicElement.addEventListener("load", function () {
+      clearInterval(refreshInterval);
+    });
+    sheetMusicElement.addEventListener("error", function (e) {
+      console.log("error", e);
+    });
+  }
+
   window.addEventListener("keydown", function (e) {
     const key = e.key;
 
@@ -155,8 +169,16 @@
     $messageModal = document.getElementById("messageModal");
 
     // api request
-    const req = await fetch("/api/getTag" + window.location.search);
-    const res = await req.json();
+    // const req = await fetch("/api/getTag" + window.location.search);
+    // const res = await req.json();
+    const res = {
+      id: "5461",
+      name: "Genitalia",
+      sheetMusic: {
+        url: "https://www.barbershoptags.com/tags/Genitalia.pdf",
+        fileType: "pdf",
+      },
+    };
 
     // add response data to container variable
     tagData = res;
@@ -174,6 +196,7 @@
       sheetMusicElement.src =
         "https://drive.google.com/viewerng/viewer?embedded=true&chrome=false&url=" +
         encodeURIComponent(res.sheetMusic.url);
+      startPDFLoadWatcher(sheetMusicElement);
     } else {
       // otherwise - embed as html image
       sheetMusicElement = document.createElement("img");
