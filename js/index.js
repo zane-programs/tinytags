@@ -75,7 +75,11 @@
     const key = e.key;
 
     if (/\b[0-9]\b/.test(key)) {
+      // clear tag number if viewing fave
+      if (isViewingFave) setCurrentTagNumber("");
+      // reset fave stuff
       resetCurrentFave();
+      // append new key
       setCurrentTagNumber(currentTagNumber + key);
     } else {
       switch (key) {
