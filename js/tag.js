@@ -169,16 +169,8 @@
     $messageModal = document.getElementById("messageModal");
 
     // api request
-    // const req = await fetch("/api/getTag" + window.location.search);
-    // const res = await req.json();
-    const res = {
-      id: "5461",
-      name: "Genitalia",
-      sheetMusic: {
-        url: "https://www.barbershoptags.com/tags/Genitalia.pdf",
-        fileType: "pdf",
-      },
-    };
+    const req = await fetch("/api/getTag" + window.location.search);
+    const res = await req.json();
 
     // add response data to container variable
     tagData = res;
