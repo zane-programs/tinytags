@@ -98,7 +98,7 @@
 
   function toggleFave() {
     // don't allow until loaded
-    if (!tagData) return;
+    if (!tagData || "error" in tagData) return;
 
     let inFaves = isInFaves();
     inFaves ? removeFromFaves() : addToFaves();
@@ -107,7 +107,7 @@
 
   window.addEventListener("keydown", function (e) {
     const key = e.key;
-    
+
     e.preventDefault();
 
     switch (key) {
