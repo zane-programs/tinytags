@@ -7,8 +7,6 @@ body {
 #tagNumber {
   color: #fff;
   font-family: sans-serif;
-  font-weight: 700;
-  font-size: 45px;
   text-align: center;
 
   width: 100%;
@@ -18,8 +16,25 @@ body {
   transform: translateY(-50%);
 }
 
+#tagNumber span {
+  font-weight: 700;
+  font-size: 45px;
+}
+
 #tagNumber.fave {
   color: #ff4be8;
+}
+
+#tagTitle {
+  display: none;
+
+  font-weight: 400;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+#tagNumber.fave #tagTitle {
+  display: block;
 }
 
 #tagView {
