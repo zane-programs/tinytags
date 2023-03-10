@@ -163,7 +163,7 @@
 
     // haha error handling
     if (res.error) {
-      alert("error\n\n" + JSON.stringify(res.error));
+      alert("error\n\n" + res.error);
       return;
     }
 
