@@ -105,20 +105,6 @@
     showModalMessage(inFaves ? "unfaved" : "faved", "#ff4be8", "#fff", 1500);
   }
 
-  function startPDFLoadWatcher(sheetMusicElement) {
-    let refreshInterval = setInterval(function () {
-      console.log("refresh!");
-      // refresh
-      sheetMusicElement.src = sheetMusicElement.src;
-    }, 3000);
-    sheetMusicElement.addEventListener("load", function () {
-      clearInterval(refreshInterval);
-    });
-    sheetMusicElement.addEventListener("error", function (e) {
-      console.log("error", e);
-    });
-  }
-
   window.addEventListener("keydown", function (e) {
     const key = e.key;
 
@@ -188,7 +174,6 @@
       sheetMusicElement.src =
         "https://drive.google.com/viewerng/viewer?embedded=true&chrome=false&url=" +
         encodeURIComponent(res.sheetMusic.url);
-      startPDFLoadWatcher(sheetMusicElement);
     } else {
       // otherwise - embed as html image
       sheetMusicElement = document.createElement("img");
