@@ -107,6 +107,8 @@
 
   window.addEventListener("keydown", function (e) {
     const key = e.key;
+    
+    e.preventDefault();
 
     switch (key) {
       case "ArrowUp":
