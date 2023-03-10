@@ -4,7 +4,7 @@
     "xml2js": "^0.4.23"
   },
   "name": "tinytags",
-  "version": "1.1.11",
+  "version": "1.1.12",
   "description": "tinytags. simple.",
   "main": "index.html",
   "scripts": {
