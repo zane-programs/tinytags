@@ -20,11 +20,9 @@ export default async function getTag(req, res) {
       try {
         // Server error on BarbershopTags.com API side
         if (!("tags" in result) && result?.pre) {
-          return res
-            .status(500)
-            .send({
-              error: result.pre?._.trim() || "BarbershopTags.com API error",
-            });
+          return res.status(500).send({
+            error: "BarbershopTags.com API: " + (result.pre?._.trim() || "Unknown error"),
+          });
         }
 
         // No tags available => 404
