@@ -27,7 +27,7 @@
   function setCurrentFave(index, value) {
     isViewingFave = true;
     currentFave = { index: index, value: value };
-    setCurrentTagNumber(currentFave.value);
+    setCurrentTagNumber(currentFave.value[0]);
     // add fave styling depending
     $tagNumber.classList.add("fave");
   }
