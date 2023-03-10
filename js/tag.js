@@ -106,11 +106,11 @@
   }
 
   function startPDFLoadWatcher(sheetMusicElement) {
-    let refreshInterval = setInterval(() => {
+    let refreshInterval = setInterval(function () {
       console.log("refresh!");
       // refresh
       sheetMusicElement.src = sheetMusicElement.src;
-    }, 1500);
+    }, 3000);
     sheetMusicElement.addEventListener("load", function () {
       clearInterval(refreshInterval);
     });
