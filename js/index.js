@@ -49,6 +49,18 @@
     setCurrentFave(prevIndex, faves[prevIndex]);
   }
 
+  function repairBrokenFaves() {
+    const faves = getFaves();
+    localStorage.setItem(
+      "faves",
+      JSON.stringify(
+        faves.filter(function (fave) {
+          fave.indexOf(null) === -1;
+        })
+      )
+    );
+  }
+
   function handleFaveNavigation(key) {
     let faves = getFaves();
     if (faves.length === 0) return;
@@ -93,6 +105,8 @@
     if (!localStorage.getItem("faves")) {
       localStorage.setItem("faves", "[]");
     }
+
+    repairBrokenFaves();
 
     $tagNumber = document.getElementById("tagNumber");
     $tagTitle = document.getElementById("tagTitle");
