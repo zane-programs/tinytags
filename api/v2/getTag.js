@@ -1,6 +1,5 @@
 const fetch = require("node-fetch")
 const { parseString } = require("xml2js");
-const convertPDFToImageURLs = require("../../pdf");
 const { pdf } = require("pdf-to-img");
 
 async function convertPDFToImageURLs(url) {
