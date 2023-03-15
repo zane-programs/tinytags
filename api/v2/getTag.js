@@ -1,4 +1,4 @@
-const { default: axios } = require("axios");
+const fetch = require("node-fetch")
 const { parseString } = require("xml2js");
 const convertPDFToImageURLs = require("../../pdf");
 
@@ -8,11 +8,11 @@ function handleError(res, e) {
 
 export default async function getTag(req, res) {
   try {
-    const apiRequest = await axios.get(
+    const apiRequest = await fetch(
       "https://www.barbershoptags.com/api.php?id=" +
         encodeURIComponent(req.query.id)
     );
-    parseString(apiRequest.data, async function parse(err, result) {
+    parseString(await apiRequest.text(), async function parse(err, result) {
       // Parse error => 500
       if (err) {
         return res.status(500).send({ error: err });
