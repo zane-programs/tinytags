@@ -2,7 +2,7 @@ const fetch = require("node-fetch")
 const { parseString } = require("xml2js");
 const { pdf } = require("pdf-to-img");
 
-async function convertPDFToImageURLs(url) {
+async function convertPDF(url) {
   const response = await fetch(url, {
     responseType: "arraybuffer",
   });
@@ -57,7 +57,7 @@ export default async function getTag(req, res) {
 
         const sheetMusicImageArray =
           fileType === "pdf"
-            ? await convertPDFToImageURLs(tag.SheetMusicAlt[0])
+            ? await convertPDF(tag.SheetMusicAlt[0])
             : [tag.SheetMusicAlt[0]];
 
         res.status(200).send({
