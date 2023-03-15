@@ -21,7 +21,9 @@ export default async function getTag(req, res) {
         // Server error on BarbershopTags.com API side
         if (!("tags" in result) && result?.pre) {
           return res.status(500).send({
-            error: "BarbershopTags.com API: " + (result.pre?._.trim() || "Unknown error"),
+            error:
+              "BarbershopTags.com API: " +
+              (result.pre?._.trim() || "Unknown error"),
           });
         }
 
