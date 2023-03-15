@@ -1,7 +1,7 @@
 {
   "functions": {
     "api/v2/getTag.js": {
-      "excludeFiles": "{node_modules/canvas/build/**/*,..vercel/**/*}"
+      "excludeFiles": "{node_modules/canvas/build/**/*,.vercel/**/*}"
     }
   }
 }
