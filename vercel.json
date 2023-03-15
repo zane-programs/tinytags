@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/v2/getTag.js": {
+      "excludeFiles": "{node_modules/**/*,.next/**/*,.vercel/**/*}"
+    }
+  }
+}
